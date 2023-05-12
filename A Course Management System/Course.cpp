@@ -1,6 +1,6 @@
 #include "Header.h"
 
-void inCourse() {
+Course inCourse() {
 	Course a;
 	cout << "Input CourseID: ";
 	getline(cin, a.CourseID);
@@ -16,6 +16,7 @@ void inCourse() {
 	getline(cin, a.Session);
 	cout << "Input Infomation: ";
 	getline(cin, a.Info);
+	return a;
 }
 
 void addCourseToSemester(string SemesterPath, Course a) {
@@ -24,6 +25,11 @@ void addCourseToSemester(string SemesterPath, Course a) {
 	SemesterFile.close();
 	string CoursePath = SemesterPath + '\\' + a.CourseID;
 	createFolder(CoursePath, a.CourseID);
+}
+
+void addCourseToSemester(string SemesterPath) {
+	Course a = inCourse();
+	addCourseToSemester(SemesterPath, a);
 }
 
 void addStudentToCourse(string CoursePath, Student a) {
@@ -37,18 +43,20 @@ void removeStudentFromCourse(string CoursePath, Student a) {
 
 }
 
+
+
 void outCourse(Course a) {
 	
 }
-void viewCourse(string SemesterPath) {
-	List CourseList{};
-	string line;
-	fstream SemesterFile(SemesterPath + ".csv", ios_base::in);
-	while (!SemesterFile.eof()) {
-		getline(SemesterFile, line);
-		line += '\n';
-		addTail(CourseList, createNode(line));
-	}
-	SemesterFile.close();
-	outList(CourseList);
-}
+//void viewCourse(string SemesterPath) {
+//	List CourseList{};
+//	string line;
+//	fstream SemesterFile(SemesterPath + ".csv", ios_base::in);
+//	while (!SemesterFile.eof()) {
+//		getline(SemesterFile, line);
+//		line += '\n';
+//		addTail(CourseList, createNode(line));
+//	}
+//	SemesterFile.close();
+//	outList(CourseList);
+//}

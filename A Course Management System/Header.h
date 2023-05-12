@@ -70,3 +70,4 @@ void inStudentToFile(fstream& File, Student a);
 Node* createNode(string data);
 void addTail(List& lst, Node* p);
 void outList(List lst);
+int getNOofFile(fstream& File);

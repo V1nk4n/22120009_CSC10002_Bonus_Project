@@ -19,13 +19,26 @@ void createClass(string SchoolYearPath, string SchoolYearName) {
 }
 
 void addStudentToClass(string ClassPath, Student a) {
-	if (a.StudentYear != "1st") {
+	if (a.StudentYear == "1st") {
 		fstream ClassFile(ClassPath + ".csv", ios_base::app);
 
-		//Ghi NO cua student
+		int NO = getNOofFile(ClassFile);
+		ClassFile << NO << ',';
 		inStudentToFile(ClassFile, a);
 
 		ClassFile.close();
 	}
 }
 
+//void viewClass(string ClassPath) {
+//	List ClassList{};
+//	string line;
+//	fstream ClassFile(ClassPath+".csv", ios_base::in);
+//	if (!ClassFile.is_open()) {
+//		while (!ClassFile.eof()) {
+//			getline(ClassFile, line);
+//			line += '\n';
+//			addTail(ClassList, createNode(line));
+//		}
+//	}
+//}

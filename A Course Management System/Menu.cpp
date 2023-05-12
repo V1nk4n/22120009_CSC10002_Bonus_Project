@@ -23,16 +23,12 @@ void SystemLogInMenu() {
 void UserMenu() {
 	int op{};
 	do {
-		cout << "0. Back" << endl;
 		cout << "1. View profile" << endl;
 		cout << "2. Change password" << endl;
 		cout << "3. Log out" << endl;
 		cout << "4. WorkSpace" << endl;
 		cout << "Enter your option: ";
 		switch (op) {
-		case 0:
-			SystemLogInMenu();
-			break;
 		case 1:
 			//View profile
 			break;
@@ -65,11 +61,17 @@ void StaffMenu() {
 		cout << "7. Add a student to a course" << endl;
 		cout << "8. Remove a student from a course" << endl;
 		cout << "9. Delete a course" << endl;
-		cout << "10. View the list of course" << endl;
+		cout << "10. View the list of courses" << endl;
+		cout << "11. View the list of classes" << endl;
+		cout << "12. View a list of studetns in a class" << endl;
+		cout << "13. View the list of students in a course" << endl;
 		cout << "Enter your option: ";
 		switch (op) {
+		case 0:
+			UserMenu();
+			break;
 		case 1:
-			//LogIn
+			
 			break;
 		case 2:
 
@@ -77,5 +79,28 @@ void StaffMenu() {
 		}
 		system("pause");
 		system("cls");
-	} while (1);
+	} while (op!=0);
+}
+
+void StudentMenu() {
+	int op{};
+	do {
+		cout << "0. Back" << endl;
+		cout << "1. View the list of courses" << endl;
+		cout << "2. View the scoreboard" << endl;
+		cout << "Enter your option: ";
+		switch (op) {
+		case 0:
+			UserMenu();
+			break;
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (op != 0);
 }
