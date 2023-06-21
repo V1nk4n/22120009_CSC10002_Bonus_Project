@@ -7,26 +7,32 @@
 //	cout << "Input year: "; cin >> a.yy;
 //}
 
-//void inStudent(Student& a) {
-//	cout << "Input StudentID: ";
-//	cin >> a.StudentID;
-//	cout << "Input FullName: ";
-//	cin.ignore(); 
-//	getline(cin, a.FullName);
-//	int pos = a.FullName.find(' '); 
-//	a.FirstName = a.FullName.substr(0, pos);
-//	a.LastName = a.FullName.substr(pos + 1);
-//	cout << "Input Gender: ";
-//	cin >> a.Gender;
-//	cout << "Input DateOfBirth" << endl;
-//	
-//	cout << "Input SocialID: ";
-//	cin >> a.SocialID;
-//	cout << "Input StudentYear: ";
-//	cin >> a.StudentYear;
-//	cout << "Input StudentClass: ";
-//	cin >> a.StudentClass;
-//}
+Student inStudent() {
+	Student a;
+	cin.ignore();
+	cout << "Input StudentID: ";
+	getline(cin, a.StudentID);
+	/*cout << "Input FullName: ";
+	getline(cin, a.FullName);
+	int pos = a.FullName.find(' '); 
+	a.FirstName = a.FullName.substr(0, pos);
+	a.LastName = a.FullName.substr(pos + 1);*/
+	cout << "Input First Name: ";
+	getline(cin, a.FirstName);
+	cout << "Input Last Name: ";
+	getline(cin, a.LastName);
+	cout << "Input Gender: ";
+	getline(cin, a.Gender);
+	cout << "Input DateOfBirth: ";
+	getline(cin, a.DateOfBirth);
+	cout << "Input SocialID: ";
+	getline(cin, a.SocialID);
+	return a;
+}
+
+void outStudent(Student a) {
+	cout << a.No << "\t" << a.SocialID << "\t" << a.FirstName << "\t" << a.FullName << "\t" << a.Gender << "\t" << a.DateOfBirth << "\t" << a.SocialID << endl;
+}
 //
 //void inStudentToFile(fstream& File, Student a) {
 //	File << a.StudentID <<','<< a.FirstName << ',' << a.LastName << ',' << a.Gender << ',' << a.DateOfBirth << ',' << a.SocialID << '\n';

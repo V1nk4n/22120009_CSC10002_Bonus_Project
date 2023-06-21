@@ -75,17 +75,24 @@ struct CourseList {
 	CourseNode* pTail;
 };
 
+Student inStudent();
+void outStudent(Student a);
+
+void tokStr(string& Str);
+
 int checkList(List lst, string des);
 void importList(string SourcePath, string DesPath);
 int checkFile(string FileName);
 void createFile(string FileName);
 void createFolder(string& Path, string Name);
 void inStudentToFile(fstream& File, Student a);
+
 void initList(List& lst);
 Node* createNode(string data);
 void addTail(List& lst, Node* p);
 void outList(List lst);
-int getNOofFile(fstream& File);
+
+int getNOofFile(ifstream& File);
 
 void createSchoolYear();
 
@@ -102,6 +109,9 @@ void chooseSchoolYear(string& SchoolYear);
 void createClass();
 void chooseClass(string& Class);
 void getClassList(List& ClassList);
+void viewClass(string Class);
+
+void addStudentToClass(string Class);
 
 void createSemester();
 void chooseSemester(string& Semester);
@@ -110,3 +120,4 @@ void getSemesterList(List& SemesterList);
 void createCourse(string Semester);
 void outCourse(Course a);
 void getCourseList(Course& temp, string Semester);
+

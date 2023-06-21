@@ -67,27 +67,38 @@ void getClassList(List& ClassList) {
 	ClassFile.close();
 }
 
-void addStudentToClass(string ClassPath, Student a) {
-	if (a.StudentYear == "1st") {
-		fstream ClassFile(ClassPath + ".csv", ios_base::app);
+void addStudentToClass(string Class) {
+	system("cls");
 
-		int NO = getNOofFile(ClassFile);
-		ClassFile << NO << ',';
-		//inStudentToFile(ClassFile, a);
-
-		ClassFile.close();
-	}
+	Class += ".csv";
+	ifstream ClassIFile(Class, ios::in);
+	int No = getNOofFile(ClassIFile);
+	ClassIFile.close();
+	
+	Student a = inStudent();
+	
+	a.No = to_string(No);
+	ofstream ClassOFile(Class, ios::app);
+	ClassOFile << a.No << '\,' << a.StudentID << '\,' << a.FirstName << '\,' << a.LastName << '\,' << a.Gender << '\,' << a.DateOfBirth << '\,' << a.SocialID << '\n';
+	ClassOFile.close();
 }
 
-//void viewClass(string ClassPath) {
-//	List ClassList{};
-//	string line;
-//	fstream ClassFile(ClassPath+".csv", ios_base::in);
-//	if (!ClassFile.is_open()) {
-//		while (!ClassFile.eof()) {
-//			getline(ClassFile, line);
-//			line += '\n';
-//			addTail(ClassList, createNode(line));
-//		}
-//	}
-//}
+
+
+void viewClass(string Class) {
+	ifstream ClassXFile;
+	Class += ".csv";
+	ClassXFile.open(Class, ios::in);
+	if (!ClassXFile.is_open()) {
+		cout << "Error opening file" << endl;
+		return;
+	}
+
+	string temp;
+	while (getline(ClassXFile, temp)) {
+		tokStr(temp);
+		cout << temp<<endl;
+	}
+
+	ClassXFile.close();
+}

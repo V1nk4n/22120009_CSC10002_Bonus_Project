@@ -120,13 +120,16 @@ void viewFile(string Path) {
 	File.close();
 }
 
-int getNOofFile(fstream& File) {
+int getNOofFile(ifstream& File) {
 	int count = 0;
 	string line;
 	while (getline(File, line)) {
 		count++;
 	}
-	return count;
+	if (count == 1)
+		return count;
+	else
+		return (count+1);
 }
 
 void upStudentListToFile() {
@@ -155,3 +158,10 @@ void upStudentListToFile() {
 	
 }
 
+void tokStr(string& Str) {
+	for (int i = 0; i < Str.length(); i++) {
+		if (Str[i] == '\,') {
+			Str[i] = '\t';
+		}
+	}
+}

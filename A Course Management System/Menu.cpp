@@ -144,8 +144,8 @@ void SchoolYearMenu(string SchoolYear) {
 void ClassMenu(string Class) {
 	system("cls");
 
-	string CurrentPath = getCurrentPath();
-	CurrentPath += "\\Class";
+	string CurrentPath = getCurrentPath()+ "\\Class";
+	
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
 	else
@@ -153,11 +153,12 @@ void ClassMenu(string Class) {
 
 	int op{};
 	do {
+		system("cls");
 		cout << Class << endl;
 		cout << "0. Back" << endl;
 		cout << "1. Import the student list" << endl;
 		cout << "2. Add new 1st student to a class" << endl;
-		cout << "3. View the list of studetns in the class" << endl;
+		cout << "3. View the list of students in the class" << endl;
 		cout << "4. Remove a student from a course" << endl;
 		cout << "5. View the scoreboard of the class" << endl;
 		cout << "Enter your option: ";
@@ -172,8 +173,11 @@ void ClassMenu(string Class) {
 			break;
 		}
 		case 2:
+			addStudentToClass(Class);
 			break;
 		case 3:
+			viewClass(Class);
+			system("pause");
 			break;
 		}
 		
