@@ -1,10 +1,3 @@
-﻿  Class.cpp
-  Course.cpp
-  Function.cpp
-  SchoolYear.cpp
-  Semester.cpp
-  Student.cpp
-  SystemLogIn.cpp
-  Generating Code...
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-D:\UniversityHCMUS\1-Freshman\Semester2\ProgrammingTech\Theory\22120009_CSC10002_Bonus_Project\Debug\A Course Management System.exe : fatal error LNK1120: 1 unresolved externals
+﻿  Menu.cpp
+D:\UniversityHCMUS\1-Freshman\Semester2\ProgrammingTech\Theory\22120009_CSC10002_Bonus_Project\A Course Management System\Menu.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  A Course Management System.vcxproj -> D:\UniversityHCMUS\1-Freshman\Semester2\ProgrammingTech\Theory\22120009_CSC10002_Bonus_Project\Debug\A Course Management System.exe

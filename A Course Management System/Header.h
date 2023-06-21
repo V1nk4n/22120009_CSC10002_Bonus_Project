@@ -4,6 +4,9 @@
 #include <string>
 #include <fstream>
 #include <direct.h> //Tao folder mkdir(ten folder)
+#include "Menu.h"
+#include "iomanip"
+#include <Windows.h>
 using namespace std;
 
 struct Date {
@@ -12,6 +15,7 @@ struct Date {
 	int yy;
 };
 struct Student {
+	string No;
 	string StudentID; //how about int?
 	string FirstName;
 	string LastName;
@@ -30,7 +34,7 @@ struct Course {
 	string	NumOfCredits;
 	string MaxNumofStudents; //50
 	string Session;
-	string Info;
+	string DayOfWeek;
 };
 struct Account {
 	string UserName;
@@ -61,13 +65,48 @@ struct List {
 	Node* pTail;
 };
 
+struct CourseNode {
+	Course a;
+	CourseNode* pNext;
+};
 
+struct CourseList {
+	CourseNode* pHead;
+	CourseNode* pTail;
+};
 
+int checkList(List lst, string des);
+void importList(string SourcePath, string DesPath);
 int checkFile(string FileName);
-fstream createFile(string FileName);
+void createFile(string FileName);
 void createFolder(string& Path, string Name);
 void inStudentToFile(fstream& File, Student a);
+void initList(List& lst);
 Node* createNode(string data);
 void addTail(List& lst, Node* p);
 void outList(List lst);
 int getNOofFile(fstream& File);
+
+void createSchoolYear();
+
+void UserMenu();
+void SchoolYearMenu(string SchoolYear);
+void ClassMenu(string Class);
+void SemesterMenu(string Semester);
+
+string getCurrentPath();
+
+void getSchoolYearList(List& SchoolYearList);
+void chooseSchoolYear(string& SchoolYear);
+
+void createClass();
+void chooseClass(string& Class);
+void getClassList(List& ClassList);
+
+void createSemester();
+void chooseSemester(string& Semester);
+void getSemesterList(List& SemesterList);
+
+void createCourse(string Semester);
+void outCourse(Course a);
+void getCourseList(Course& temp, string Semester);

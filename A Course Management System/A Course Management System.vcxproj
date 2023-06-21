@@ -128,6 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="SchoolYear.h" />
+    <ClInclude Include="SystemLogIn.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class.cpp" />
