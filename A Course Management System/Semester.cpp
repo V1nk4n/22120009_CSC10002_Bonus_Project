@@ -19,6 +19,12 @@ void createSemester() {
 	SemesterFile.close();
 
 	createFolder(SemesterPath, a.Semester);
+	ofstream File(SemesterPath + ".csv", ios_base::out);
+	if (!File) {
+		cout << "Error opening file." << endl;
+	}
+	File << "CourseID" << '\,' << "CourseName" << '\,' << "ClassName" << '\,' << "TeacherName" << '\,' << "NumOfCredits" << '\,' << "MaxNumOfStudents" << '\,' << "Session" << '\,' << "DayOfWeek" << '\n';
+	File.close();
 
 	SetCurrentDirectoryA("..");
 }

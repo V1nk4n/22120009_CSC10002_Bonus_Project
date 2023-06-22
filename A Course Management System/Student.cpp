@@ -9,7 +9,6 @@
 
 Student inStudent() {
 	Student a;
-	cin.ignore();
 	cout << "Input StudentID: ";
 	getline(cin, a.StudentID);
 	/*cout << "Input FullName: ";

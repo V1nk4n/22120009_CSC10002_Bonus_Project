@@ -85,7 +85,7 @@ void addStudentToClass(string Class) {
 
 
 
-void viewClass(string Class) {
+void viewClassList(string Class) {
 	ifstream ClassXFile;
 	Class += ".csv";
 	ClassXFile.open(Class, ios::in);

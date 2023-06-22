@@ -14,7 +14,7 @@ Course inCourse() {
 	cout << "Input NumOfCredits: ";
 	getline(cin, a.NumOfCredits);
 	cout << "Input MaxNumOfStudents: ";
-	getline(cin, a.MaxNumofStudents);
+	getline(cin, a.MaxNumOfStudents);
 	cout << "Input Session: ";
 	getline(cin, a.Session);
 	cout << "Input Day Of Week: ";
@@ -23,46 +23,77 @@ Course inCourse() {
 }
 
 void outCourse(Course a) {
-	cout << a.CourseID << "\t" << a.CourseName << "\t" << a.ClassName << "\t" << a.TeacherName << "\t" << a.NumOfCredits << "\t" << a.MaxNumofStudents << "\t" << a.Session << "\t" << a.DayOfWeek << endl;
+	cout << a.CourseID << "\t" << a.CourseName << "\t" << a.ClassName << "\t" << a.TeacherName << "\t" << a.NumOfCredits << "\t" << a.MaxNumOfStudents << "\t" << a.Session << "\t" << a.DayOfWeek << endl;
 }
 
 void createCourse(string Semester) {
 	system("cls");
 	Course a = inCourse();
 	ofstream SemesterFile(Semester+".csv", ios_base::app);
-	SemesterFile << a.CourseID << '\,' << a.CourseName << '\,' << a.ClassName << '\,' << a.TeacherName << '\,' << a.NumOfCredits << '\,' << a.MaxNumofStudents << '\,' << a.Session << '\,' << a.DayOfWeek << '\n';
+	SemesterFile << a.CourseID << '\,' << a.CourseName << '\,' << a.ClassName << '\,' << a.TeacherName << '\,' << a.NumOfCredits << '\,' << a.MaxNumOfStudents << '\,' << a.Session << '\,' << a.DayOfWeek << '\n';
 	SemesterFile.close();
+
+	ofstream CourseFile(a.CourseID + ".csv", ios::out);
+	CourseFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' << "Gender" << '\,' << "DayOfBirth" << '\,' << "SocialID" << '\n';
+	CourseFile.close();
 }
 
 //void getCourseList(CourseList& CourseList) {
-void getCourseList(Course& temp, string Semester){
+//void viewCourseList(Course& temp, string Semester){
+//
+//	ifstream CourseFile;
+//	CourseFile.open(Semester+".csv", ios::in);
+//	if (!CourseFile.is_open()) {
+//		return;
+//	}
+//
+//	/*Course temp;*/
+//	
+//	getline(CourseFile, temp.CourseID, ',');
+//	getline(CourseFile, temp.CourseName, ',');
+//	getline(CourseFile, temp.ClassName, ',');
+//	getline(CourseFile, temp.TeacherName, ',');
+//	getline(CourseFile, temp.NumOfCredits, ',');
+//	getline(CourseFile, temp.MaxNumofStudents, ',');
+//	getline(CourseFile, temp.Session, ',');
+//	getline(CourseFile, temp.DayOfWeek, '\n');
+//
+//	CourseFile.close();
+//}
 
+void viewCourseList(string Semester) {
 	ifstream CourseFile;
-	CourseFile.open(Semester+".csv", ios::in);
+	Semester += ".csv";
+	CourseFile.open(Semester, ios::in);
 	if (!CourseFile.is_open()) {
+		cout << "Error opening file" << endl;
 		return;
 	}
 
-	/*Course temp;*/
-	
-	getline(CourseFile, temp.CourseID, ',');
-	getline(CourseFile, temp.CourseName, ',');
-	getline(CourseFile, temp.ClassName, ',');
-	getline(CourseFile, temp.TeacherName, ',');
-	getline(CourseFile, temp.NumOfCredits, ',');
-	getline(CourseFile, temp.MaxNumofStudents, ',');
-	getline(CourseFile, temp.Session, ',');
-	getline(CourseFile, temp.DayOfWeek, '\n');
+	string temp;
+	while (getline(CourseFile, temp)) {
+		tokStr(temp);
+		cout << temp << endl;
+	}
 
 	CourseFile.close();
 }
 
 
-void addStudentToCourse(string CoursePath, Student a) {
-	fstream CourseFile(CoursePath + ".csv", ios_base::app);
-	//Ghi NO cua student
-	//inStudentToFile(CourseFile, a);
-	CourseFile.close();
+void addStudentToCourse(string CourseID) {
+	system("cls");
+
+	CourseID += ".csv";
+	ifstream CourseIFile(CourseID, ios::in);
+	int No = getNOofFile(CourseIFile);
+	CourseIFile.close();
+
+	Student a = inStudent();
+
+	a.No = to_string(No);
+	ofstream CourseOFile(CourseID, ios::app);
+	CourseOFile << a.No << '\,' << a.StudentID << '\,' << a.FirstName << '\,' << a.LastName << '\,' << a.Gender << '\,' << a.DateOfBirth << '\,' << a.SocialID << '\n';
+	CourseOFile.close();
 }
 
 void removeStudentFromCourse(string CoursePath, Student a) {

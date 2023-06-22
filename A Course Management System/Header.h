@@ -32,7 +32,7 @@ struct Course {
 	string ClassName;
 	string TeacherName;
 	string	NumOfCredits;
-	string MaxNumofStudents; //50
+	string MaxNumOfStudents; //50
 	string Session;
 	string DayOfWeek;
 };
@@ -86,6 +86,7 @@ int checkFile(string FileName);
 void createFile(string FileName);
 void createFolder(string& Path, string Name);
 void inStudentToFile(fstream& File, Student a);
+void viewFile(string FileName);
 
 void initList(List& lst);
 Node* createNode(string data);
@@ -98,8 +99,8 @@ void createSchoolYear();
 
 void UserMenu();
 void SchoolYearMenu(string SchoolYear);
-void ClassMenu(string Class);
-void SemesterMenu(string Semester);
+void ClassMenu(string SchoolYear, string Class);
+void SemesterMenu(string SchoolYear, string Semester);
 
 string getCurrentPath();
 
@@ -109,7 +110,7 @@ void chooseSchoolYear(string& SchoolYear);
 void createClass();
 void chooseClass(string& Class);
 void getClassList(List& ClassList);
-void viewClass(string Class);
+void viewClassList(string Class);
 
 void addStudentToClass(string Class);
 
@@ -119,5 +120,6 @@ void getSemesterList(List& SemesterList);
 
 void createCourse(string Semester);
 void outCourse(Course a);
-void getCourseList(Course& temp, string Semester);
+void viewCourseList(string Semester);
+void addStudentToCourse(string CourseID);
 

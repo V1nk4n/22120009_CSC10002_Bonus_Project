@@ -105,18 +105,21 @@ void outList(List lst) {
 	}
 }
 
-void viewFile(string Path) {
-	string line;
-	fstream File(Path + ".csv", ios_base::in);
-	if (File.is_open()) {
-		while (getline(File, line)) {
-			line += '\n';
-			cout << line;
-		}
-	}
-	else {
+void viewFile(string FileName) {
+	ifstream File;
+	FileName += ".csv";
+	File.open(FileName, ios::in);
+	if (!File.is_open()) {
 		cout << "Error opening file" << endl;
+		return;
 	}
+
+	string temp;
+	while (getline(File, temp)) {
+		tokStr(temp);
+		cout << temp << endl;
+	}
+
 	File.close();
 }
 

@@ -122,7 +122,7 @@ void SchoolYearMenu(string SchoolYear) {
 		case 2: {
 			string Class;
 			chooseClass(Class);
-			ClassMenu(Class);
+			ClassMenu(SchoolYear, Class);
 			break;
 		}
 		case 3:
@@ -131,7 +131,7 @@ void SchoolYearMenu(string SchoolYear) {
 		case 4: 
 			string Semester;
 			chooseSemester(Semester);
-			SemesterMenu(Semester);
+			SemesterMenu(SchoolYear, Semester);
 			break;
 		}
 		system("pause");
@@ -141,7 +141,7 @@ void SchoolYearMenu(string SchoolYear) {
 	
 }
 
-void ClassMenu(string Class) {
+void ClassMenu(string SchoolYear, string Class) {
 	system("cls");
 
 	string CurrentPath = getCurrentPath()+ "\\Class";
@@ -165,18 +165,20 @@ void ClassMenu(string Class) {
 		cin >> op;
 		switch (op) {
 		case 0:
+			SetCurrentDirectoryA("..");
+			SchoolYearMenu(SchoolYear);
 			break;
 		case 1: {
 			string SourcePath;
-			string SourceDes = Class + ".csv";
-			importList(SourcePath, SourceDes);
+			string DesPath = Class + ".csv";
+			importList(SourcePath, DesPath);
 			break;
 		}
 		case 2:
 			addStudentToClass(Class);
 			break;
 		case 3:
-			viewClass(Class);
+			viewFile(Class);
 			system("pause");
 			break;
 		}
@@ -187,7 +189,7 @@ void ClassMenu(string Class) {
 	} while (1);
 }
 
-void SemesterMenu(string Semester) {
+void SemesterMenu(string SchoolYear, string Semester) {
 
 	string CurrentPath = getCurrentPath();
 	CurrentPath += "\\Semester\\" + Semester;
@@ -203,7 +205,7 @@ void SemesterMenu(string Semester) {
 		cout << "0. Back" << endl;
 		cout << "1. Create a course" << endl;
 		cout << "2. View the list of courses" << endl;
-		cout << "3. Import the student list" << endl;
+		cout << "3. Import the student list to a course" << endl;
 		cout << "4. Add a student to a course" << endl;
 		cout << "5. View the list of students in a course" << endl;
 		cout << "6. Update course information" << endl;
@@ -212,19 +214,47 @@ void SemesterMenu(string Semester) {
 		cin >> op;
 		switch (op) {
 		case 0:
+			SetCurrentDirectoryA("..");
+			SchoolYearMenu(SchoolYear);
 			break;
 		case 1:
 			createCourse(Semester);
 			break;
 		case 2: {
-			Course a;
-			getCourseList(a, Semester);
-			outCourse(a);
+			viewFile(Semester);
 			system("pause");
 			break;
 		}
-		case 3:
+		case 3: {
+			viewFile(Semester);
+			string SourcePath;
+			string DesPath;
+			cout << "Input the CourseID: ";
+			cin.ignore();
+			getline(cin, DesPath);
+			DesPath += ".csv";
+			importList(SourcePath, DesPath);
 			break;
+		}
+		case 4: {
+			viewFile(Semester);
+			string CourseID;
+			cout << "Input the CourseID: ";
+			cin.ignore();
+			getline(cin, CourseID);
+			addStudentToCourse(CourseID);
+			break;
+		}
+		case 5: {
+			viewFile(Semester);
+			string CourseID;
+			cout << "Input the CourseID: ";
+			cin.ignore();
+			getline(cin, CourseID);
+			viewFile(CourseID);
+			break;
+		}
+
 		}
 	} while (1);
 }
