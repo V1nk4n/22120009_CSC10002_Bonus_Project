@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "iomanip"
 #include <Windows.h>
+#include <filesystem>
 using namespace std;
 
 struct Date {
@@ -80,6 +81,7 @@ void outStudent(Student a);
 
 void tokStr(string& Str);
 
+void copyFile(ifstream& File1, ofstream& File2);
 int checkList(List lst, string des);
 void importList(string SourcePath, string DesPath);
 int checkFile(string FileName);
@@ -122,4 +124,8 @@ void createCourse(string Semester);
 void outCourse(Course a);
 void viewCourseList(string Semester);
 void addStudentToCourse(string CourseID);
+void removeStudentFromCourse(string CourseID, string StudentID, int NumLines);
+void updateCourse(string Semester, string CourseID, int NumLines);
+void deleteCourse(string SemesterFileName, string CourseID, int NumLines);
 
+void im_exFile(string LinkIm, string LinkEx);

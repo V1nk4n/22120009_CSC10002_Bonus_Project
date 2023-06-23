@@ -138,6 +138,7 @@
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SchoolYear.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Semester.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="SystemLogIn.cpp" />

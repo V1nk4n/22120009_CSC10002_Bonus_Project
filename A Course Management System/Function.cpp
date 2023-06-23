@@ -157,6 +157,9 @@ void upStudentListToFile() {
 
 	copyFile(SourceFile, DesFile);
 
+	SourceFile.close();
+	DesFile.close();
+
 	//COPY FILE TREN SANG FILE HE THONG
 	
 }
@@ -168,3 +171,5 @@ void tokStr(string& Str) {
 		}
 	}
 }
+
+
