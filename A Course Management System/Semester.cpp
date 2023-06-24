@@ -26,6 +26,9 @@ void createSemester() {
 	File << "CourseID" << '\,' << "CourseName" << '\,' << "ClassName" << '\,' << "TeacherName" << '\,' << "NumOfCredits" << '\,' << "MaxNumOfStudents" << '\,' << "Session" << '\,' << "DayOfWeek" << '\n';
 	File.close();
 
+	string ScoreBoardName = a.Semester + "\\ScoreBoard";
+	_mkdir(ScoreBoardName.c_str());
+
 	SetCurrentDirectoryA("..");
 }
 

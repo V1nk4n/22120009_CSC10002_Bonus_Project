@@ -167,7 +167,7 @@ void updateCourse(string SemesterFileName, string CourseID, int NumLines) {
 		}
 		else {
 			string NewCourse;
-			NewCourse = a.CourseID + '\,' + a.CourseName + '\,' + a.ClassName + '\,' + a.TeacherName + '\,' + a.NumOfCredits + '\,' + a.MaxNumOfStudents + '\,' + a.Session + '\,' + a.DayOfWeek + '\n';
+			NewCourse = a.CourseID + '\,' + a.CourseName + '\,' + a.ClassName + '\,' + a.TeacherName + '\,' + a.NumOfCredits + '\,' + a.MaxNumOfStudents + '\,' + a.Session + '\,' + a.DayOfWeek;
 			temp = NewCourse;
 			Lines[n++] = temp;
 		}
@@ -233,46 +233,48 @@ void im_exFile(string LinkIm, string LinkEx) {
 	ExportFile.close();
 }
 
-void updateStudentScore(string SemesterFileName, string CourseID, int NumLines) { // chua hoan thanh
-	cout << "Input Final Mark: ";
+void updateStudentScore(string ScoreBoardName, string StudentID, int NumLines) { 
+	string TotalMark;
+	cout << "Input Total Mark: ";
+	cin >> TotalMark;
 
-	ifstream SemesterIFile(SemesterFileName, ios::in);
+	string FinalMark;
+	cout << "Input Final Mark: ";
+	cin >> FinalMark;
+
+	string MidternMark;
+	cout << "Input Midtern Mark: ";
+	cin >> MidternMark;
+
+	string OtherMark;
+	cout << "Input Other Mark: ";
+	cin >> OtherMark;
+
+	ifstream ScoreBoardIFile(ScoreBoardName, ios::in);
 	string* Lines = new string[NumLines];
 	string temp;
 	int n = 0;
-	while (getline(SemesterIFile, temp)) {
-		if (getNo(temp) != CourseID) {
+	while (getline(ScoreBoardIFile, temp)) {
+		if (getID(temp) != StudentID) {
 			Lines[n++] = temp;
 		}
 		else {
-			string NewCourse;
-			NewCourse = a.CourseID + '\,' + a.CourseName + '\,' + a.ClassName + '\,' + a.TeacherName + '\,' + a.NumOfCredits + '\,' + a.MaxNumOfStudents + '\,' + a.Session + '\,' + a.DayOfWeek + '\n';
-			temp = NewCourse;
+			int t = temp.find('\,', temp.find('\,', temp.find('\,', temp.find('\,') + 1) + 1) + 1);
+			string NewStudent = temp.substr(0, t) + '\,' + TotalMark + '\,' + FinalMark + '\,' + MidternMark + '\,' + OtherMark;
+			temp = NewStudent;
 			Lines[n++] = temp;
 		}
 	}
-	SemesterIFile.close();
+	ScoreBoardIFile.close();
 
-	ofstream SemesterOFile(SemesterFileName, ios::out);
+	ofstream ScoreBoardOFile(ScoreBoardName, ios::out);
 	int t = 0;
 	while (t <= n) {
 		Lines[t] += '\n';
-		SemesterOFile << Lines[t++];
+		ScoreBoardOFile << Lines[t++];
 	}
 	delete[] Lines;
-	SemesterOFile.close();
-
-
-	string imCourse = CourseID + ".csv";
-	string exCourse = a.CourseID + ".csv";
-	im_exFile(imCourse, exCourse);
-	remove(imCourse.c_str());
-
-	imCourse = "ScoreBoard\\" + CourseID + ".csv";
-	exCourse = "ScoreBoard\\" + a.CourseID + ".csv";
-	im_exFile(imCourse, exCourse);
-	remove(imCourse.c_str());
-
+	ScoreBoardOFile.close();
 }
 
 

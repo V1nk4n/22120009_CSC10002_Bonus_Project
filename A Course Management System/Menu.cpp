@@ -339,6 +339,25 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			getline(cin, CourseID);
 			string ScoreBoardName = "ScoreBoard\\" + CourseID;
 			viewFile(CourseID);
+			system("pause");
+			break;
+		}
+		case 12: {
+			string CourseID;
+			cout << "Input the CourseID: ";
+			cin.ignore();
+			getline(cin, CourseID);
+
+			string StudentID;
+			cout << "Input the StudentID: ";
+			getline(cin, StudentID);
+
+			string ScoreBoardName = "ScoreBoard\\" + CourseID + ".csv";
+
+			ifstream SemesterFile(ScoreBoardName, ios::in);
+			int NumLines = getNOofFile(SemesterFile);
+			SemesterFile.close();
+			updateStudentScore(ScoreBoardName, StudentID, NumLines);
 			break;
 		}
 		}

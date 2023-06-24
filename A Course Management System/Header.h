@@ -129,3 +129,4 @@ void updateCourse(string Semester, string CourseID, int NumLines);
 void deleteCourse(string SemesterFileName, string CourseID, int NumLines);
 
 void im_exFile(string LinkIm, string LinkEx);
+void updateStudentScore(string CourseID, string StudentID, int NumLines);
