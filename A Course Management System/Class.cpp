@@ -102,3 +102,94 @@ void viewClassList(string Class) {
 
 	ClassXFile.close();
 }
+
+void viewScoreBoardClass(string Class, int NumLines) {
+	SetCurrentDirectoryA("..");
+	
+	string temp;
+	string* Lines = new string[NumLines];
+
+	string ClassPath = "Class\\" + Class;
+	ifstream ClassIFile(ClassPath, ios::in);
+
+	/*int n = 0;
+	getline(ClassIFile, temp);
+	Lines[n++] = temp;*/
+	int n = 0;
+	
+	while (getline(ClassIFile, temp)) {
+		string StudentID = getID(temp);
+		double Mark = 0;
+		int nMark = 0;
+		getMarkCourse(StudentID, Mark, nMark);
+		Mark = Mark / (double)nMark;
+		temp +='\,' + to_string(Mark);
+		Lines[n++] = temp;
+	}
+	ClassIFile.close();
+
+	ofstream ClassOFile(Class, ios::out);
+	int t = 0;
+	while (t < n) {
+		Lines[t] += '\n';
+		ClassOFile << Lines[t++];
+	}
+	delete[] Lines;
+	ClassOFile.close();
+
+	string newPath = getCurrentPath() + "\\Class";
+	SetCurrentDirectoryA(newPath.c_str());
+}
+
+void getMarkCourse(string StudentID, double& Mark, int& nMark) {
+	string Semester;
+	cout << "Input Semester: ";
+	cin >> Semester;
+
+	List CourseList{};
+	initList(CourseList);
+	getCourseList(Semester, CourseList);
+
+	Node* i = CourseList.pHead;
+	string Path = "Semester\\" + Semester + "\\Scoreboard\\";
+	do {
+		string CoursePath = Path + i->info + ".csv";
+		ifstream CourseFile(CoursePath, ios::in);
+		string temp;
+		while (getline(CourseFile, temp)) {
+			if (getID(temp) == StudentID) {
+				Mark += getTotalMark(temp);
+				nMark++;
+			}
+		}
+		CourseFile.close();
+		i = i->pNext;
+	} while (i != NULL);
+}
+
+double getTotalMark(string Data) {
+	int prevTotal = Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,') + 1) + 1) + 1);
+	int nextTotal = Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,') + 1) + 1) + 1) + 1);
+	string temp = Data.substr(prevTotal+1, nextTotal-prevTotal-1);
+	double x = atof(temp.c_str());
+	return x;
+}
+void getCourseList(string Semester, List& CourseList) {
+	ifstream SemesterFile;
+	string Path = "Semester\\" + Semester + "\\" + Semester + ".csv";
+	SemesterFile.open(Path, ios::in);
+	if (!SemesterFile.is_open()) {
+		cout << "Error opening file" << endl;
+		return;
+	}
+
+	string temp;
+	while (getline(SemesterFile, temp, ',')) {
+		temp = getNo(temp);
+		Node* buffer = createNode(temp);
+		addTail(CourseList, buffer);
+		getline(SemesterFile, temp);
+	}
+
+	SemesterFile.close();
+}

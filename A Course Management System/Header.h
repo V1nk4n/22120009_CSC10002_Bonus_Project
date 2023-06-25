@@ -90,6 +90,10 @@ void createFolder(string& Path, string Name);
 void inStudentToFile(fstream& File, Student a);
 void viewFile(string FileName);
 
+string getID(string Data);
+string getNo(string Data);
+double getTotalMark(string Data);
+
 void initList(List& lst);
 Node* createNode(string data);
 void addTail(List& lst, Node* p);
@@ -113,6 +117,7 @@ void createClass();
 void chooseClass(string& Class);
 void getClassList(List& ClassList);
 void viewClassList(string Class);
+void viewScoreBoardClass(string Class, int NumLines);
 
 void addStudentToClass(string Class);
 
@@ -127,6 +132,8 @@ void addStudentToCourse(string CourseID);
 void removeStudentFromCourse(string CourseID, string StudentID, int NumLines);
 void updateCourse(string Semester, string CourseID, int NumLines);
 void deleteCourse(string SemesterFileName, string CourseID, int NumLines);
+void getMarkCourse(string StudentID, double& Mark, int& nMark);
+void getCourseList(string Semester, List& CourseList);
 
 void im_exFile(string LinkIm, string LinkEx);
 void updateStudentScore(string CourseID, string StudentID, int NumLines);

@@ -180,6 +180,16 @@ void ClassMenu(string SchoolYear, string Class) {
 			viewFile(Class);
 			system("pause");
 			break;
+		case 4: {
+			ifstream ClassFile(Class + ".csv", ios::in);
+			int NumLines = getNOofFile(ClassFile);
+			ClassFile.close();
+			string ClassPath = Class + ".csv";
+			viewScoreBoardClass(ClassPath, NumLines);
+			viewFile(Class);
+			system("pause");
+			break;
+		}
 		}
 		
 		
