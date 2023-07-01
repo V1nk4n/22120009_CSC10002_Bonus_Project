@@ -18,9 +18,12 @@ void createClass() {
 		SchoolYearFile << ClassName << '\n';
 		SchoolYearFile.close();
 
-		ClassPath += '\\' + ClassName;
-		createFile(ClassPath);
+		createFile(ClassName);
 	}
+
+	ofstream ClassFile(ClassName + ".csv", ios::out);
+	ClassFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' << "Gender" << '\,' << "DayOfBirth" << '\,' << "SocialID" << '\,' << "TotalMark" << '\n';
+	ClassFile.close();
 
 	SetCurrentDirectoryA("..");
 }
@@ -128,7 +131,7 @@ void viewScoreBoardClass(string Class, int NumLines) {
 	}
 	ClassIFile.close();
 
-	ofstream ClassOFile(Class, ios::out);
+	ofstream ClassOFile(ClassPath, ios::out);
 	int t = 0;
 	while (t < n) {
 		Lines[t] += '\n';

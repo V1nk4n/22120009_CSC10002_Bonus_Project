@@ -1,11 +1,12 @@
 #include "Header.h"
 
 void createSemester() {
+	system("cls");
+
 	Semester a;
-	cout << "Input Semester:"; cin.ignore(); getline(cin, a.Semester);
-	/*a.SchoolYear = SchoolYear;*/
+	cout << "Input Semester: "; cin.ignore(); getline(cin, a.Semester);
 	cout << "Input StartDate: "; cin.ignore(); getline(cin, a.StartDate);
-	cout << "Input EndDate :"; cin.ignore(); getline(cin, a.EndDate);
+	cout << "Input EndDate: "; cin.ignore(); getline(cin, a.EndDate);
 	
 	string SemesterPath = getCurrentPath() + "\\Semester";
 	SetCurrentDirectoryA(SemesterPath.c_str());

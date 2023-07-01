@@ -226,6 +226,7 @@ void SemesterMenu(string SchoolYear, string Semester) {
 		cout << "12. Update a student's result" << endl;
 		cout << "Enter your option: ";
 		cin >> op;
+		system("cls");
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
@@ -251,6 +252,7 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 4: {
+			
 			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
@@ -261,12 +263,14 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 5: {
+
 			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
 			cin.ignore();
 			getline(cin, CourseID);
 			viewFile(CourseID);
+			system("pause");
 			break;
 		}
 		case 6: {
@@ -292,6 +296,7 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 7: {
+
 			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
@@ -305,6 +310,7 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 8: {
+
 			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
