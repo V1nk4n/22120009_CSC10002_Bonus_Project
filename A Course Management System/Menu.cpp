@@ -340,7 +340,6 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			cout << "Input link import: ";
 			cin.ignore();
 			getline(cin, LinkIm);
-
 			string CourseID;
 			cout << "Input the CourseID: ";
 			getline(cin, CourseID);
