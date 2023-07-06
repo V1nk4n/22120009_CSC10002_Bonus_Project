@@ -1,2 +1,18 @@
-an,123,1
-vinh an,123,12
+UserName,Password,ID,FirstName,LastName,Gender,DayOfBirth,SocialID
+123,123,2212,Truong,Vinh An,Male,18/08/2004,123456
+
+StaffTest,123,808180,Minh Hoang,Nhat,Male,02/02/1998,1234567898
+
+
+Staff01,123,123456,Nguyen Van,A,Male,20/09/1994,1234567891
+
+Staff,123,1234,Nguyen Van,A,Male,11/12/1992,1234567898
+
+TestStaff,123,1213,Nguyen Van,A,Male,18/02/1992,1234567898
+
+Test,123,1213,Nguyen Van,A,Male,19/02/1992,1234567898
+
+test,123,1214,Nguyen Ngoc,B,Female,01/02/1992,1234567898
+
+stest,123,1234,Nguyen Van,A,Male,18/02/1992,1234567898
+

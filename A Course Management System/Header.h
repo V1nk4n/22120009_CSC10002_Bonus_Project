@@ -27,6 +27,14 @@ struct Student {
 	string StudentYear;
 	string StudentClass;
 };
+struct Person {
+	string ID; //how about int?
+	string FirstName;
+	string LastName;
+	string Gender;
+	string DateOfBirth;
+	string SocialID; //how about int?
+};
 struct Course {
 	string CourseID;
 	string CourseName;
@@ -41,6 +49,8 @@ struct Account {
 	string UserName;
 	string Password;
 	string Title;
+	Person Staff;
+	Student Student;
 };
 
 struct Semester {
@@ -76,10 +86,37 @@ struct CourseList {
 	CourseNode* pTail;
 };
 
+
+const string CODE = "1412";
+
+
+void StaffOrStudent();
+void StaffLogin(Account& a);
+void StaffLogSign();
+void StudentLogSign();
+void StaffMenu();
+void SchoolYearMenu();
+void StudentMenu();
+void StudentLogin(Account& a);
+void StaffSignUp();
+void viewStaffProfile(Account& a);
+void readStaffAccount(Account& a, string temp);
+int getToken(string& token, string s, int& startPos);
+void changeStaffProfile(Account& a, int NumLines);
+void updateProfile(Account& a);
+void displayProfile(Account a);
+void StudentSignUp();
+void viewStudentProfile(Account& a);
+void readStudentAccount(Account& a, string temp);
+void changeStudentProfile(Account& a, int NumLines);
+void updateStudentProfile(Account& a);
+void displayStudentProfile(Account a);
+
 Student inStudent();
 void outStudent(Student a);
 
-void tokStr(string& Str);
+void tString(string& Str);
+void nString(string& Str);
 
 void copyFile(ifstream& File1, ofstream& File2);
 int checkList(List lst, string des);
@@ -103,8 +140,8 @@ int getNOofFile(ifstream& File);
 
 void createSchoolYear();
 
-void UserMenu();
-void SchoolYearMenu(string SchoolYear);
+void StaffMenu();
+void Class_SemesterMenu(string SchoolYear);
 void ClassMenu(string SchoolYear, string Class);
 void SemesterMenu(string SchoolYear, string Semester);
 
@@ -132,8 +169,13 @@ void addStudentToCourse(string CourseID);
 void removeStudentFromCourse(string CourseID, string StudentID, int NumLines);
 void updateCourse(string Semester, string CourseID, int NumLines);
 void deleteCourse(string SemesterFileName, string CourseID, int NumLines);
-void getMarkCourse(string StudentID, double& Mark, int& nMark);
+void getMarkCourse(string StudentID, double& Mark, int& nMark, string Semester);
 void getCourseList(string Semester, List& CourseList);
+void getCourse(string Semester, List& CourseList);
+void viewCourseListStudent(Student a);
+void viewScoreBoardStudent(Student a);
 
 void im_exFile(string LinkIm, string LinkEx);
 void updateStudentScore(string CourseID, string StudentID, int NumLines);
+
+void viewStaffProfile(Account a, ifstream& AccountFile);

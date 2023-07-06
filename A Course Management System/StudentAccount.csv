@@ -1,0 +1,4 @@
+UserName,Password,ID,FirstName,LastName,Gender,DayOfBirth,SocialID,Class,Year
+123,123,22120009,Truong,Shin,Male,18/08/2004,867911513,22CTT2,1st
+,,,,,,,,,
+VinhAn,123,22120009,Truong Vinh,An,Male,18/08/2004,1234560789,22CTT2,1st

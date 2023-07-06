@@ -2,15 +2,12 @@
 
 void createSemester() {
 	system("cls");
-
 	Semester a;
 	cout << "Input Semester: "; cin.ignore(); getline(cin, a.Semester);
 	cout << "Input StartDate: "; cin.ignore(); getline(cin, a.StartDate);
 	cout << "Input EndDate: "; cin.ignore(); getline(cin, a.EndDate);
-	
 	string SemesterPath = getCurrentPath() + "\\Semester";
 	SetCurrentDirectoryA(SemesterPath.c_str());
-
 	ofstream SemesterFile("Semester.csv",ios::out|ios::app);
 	if (!SemesterFile.is_open()) {
 		cout << "Error opening file" << endl;
@@ -18,7 +15,6 @@ void createSemester() {
 	}
 	SemesterFile << a.Semester << '\,' << a.StartDate << '\,' << a.EndDate << '\n';
 	SemesterFile.close();
-
 	createFolder(SemesterPath, a.Semester);
 	ofstream File(SemesterPath + ".csv", ios_base::out);
 	if (!File) {
@@ -29,7 +25,6 @@ void createSemester() {
 
 	string ScoreBoardName = a.Semester + "\\ScoreBoard";
 	_mkdir(ScoreBoardName.c_str());
-
 	SetCurrentDirectoryA("..");
 }
 
@@ -40,8 +35,7 @@ void chooseSemester(string& Semester) {
 
 	if (SetCurrentDirectoryA(ClassPath.c_str()) == 0)
 		cout << "Failed" << endl;
-	else
-		cout << "Successful" << endl;
+	cout << "SEMESTER" << endl;
 
 	List SemesterList;
 	initList(SemesterList);

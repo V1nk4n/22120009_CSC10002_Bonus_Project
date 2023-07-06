@@ -29,7 +29,7 @@ int checkList(List lst, string des) {
 	return 0;
 }
 void chooseSchoolYear(string& SchoolYear) {
-
+	cout << "SCHOOLYEAR" << endl;
 	List SchoolYearList;
 	initList(SchoolYearList);
 

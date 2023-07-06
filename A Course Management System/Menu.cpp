@@ -1,52 +1,24 @@
 #include "Header.h";
+Account acc;
 
-
-void SystemLogInMenu() {
-	int op{};
-	do {
-		cout << "0. End" << endl;
-		cout << "1. Log in" << endl;
-		cout << "2. Sign up" << endl;
-		cout << "Enter your option: ";
-		cin >> op;
-		switch (op) {
-		case 1:
-			system("cls");
-			UserMenu();
-			break;
-		case 2:
-
-			break;
-		}
-		system("pause");
-		system("cls");
-	} while (op != 0);
-}
-
-void UserMenu() {
+void StaffOrStudent() {
 	system("cls");
 	int op{};
 	do {
-		cout << "1. View profile" << endl;
-		cout << "2. Change password" << endl;
-		cout << "3. Log out" << endl;
-		cout << "4. WorkSpace" << endl;
+		cout << "STAFF OR STUDENT" << endl;
+		cout << "0. End" << endl;
+		cout << "1. Staff" << endl;
+		cout << "2. Student" << endl;
 		cout << "Enter your option: ";
 		cin >> op;
-		system("cls");
 		switch (op) {
+		case 0:
+			return;
 		case 1:
-			//View profile
+			StaffLogSign();
 			break;
 		case 2:
-			//Change password (xoa 1 hang trong file r ghi lai)
-			break;
-		case 3:
-			SystemLogInMenu();
-			break;
-		case 4:
-			StaffMenu();
-			//Neu la Student vao StudentMenu
+			StudentLogSign();
 			break;
 		}
 		system("pause");
@@ -54,18 +26,168 @@ void UserMenu() {
 	} while (1);
 }
 
+void StaffLogSign() {
+	system("cls");
+	int op{};
+	do {
+		cout << "STAFF LOG SIGN" << endl;
+		cout << "0. Back" << endl;
+		cout << "1. Log in" << endl;
+		cout << "2. Sign up" << endl;
+		cout << "Enter your option: ";
+		cin >> op;
+		switch (op) {
+		case 0:
+			StaffOrStudent();
+			break;
+		case 1:
+			system("cls");
+			StaffLogin(acc);
+			StaffMenu();
+			break;
+		case 2:
+			system("cls");
+			StaffSignUp();
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (op != 0);
+}
+
 void StaffMenu() {
+	system("cls");
+	int op{};
+	do {
+		
+		cout << "STAFF MENU" << endl;
+		cout << "0. Back" << endl;
+		cout << "1. View profile" << endl;
+		cout << "2. Change profile" << endl;
+		cout << "3. Log out" << endl;
+		cout << "4. WorkSpace" << endl;
+		cout << "Enter your option: ";
+		cin >> op;
+		system("cls");
+		switch (op) {
+		case 0:
+			StaffLogSign();
+			break;
+		case 1: {
+			viewStaffProfile(acc);
+			break;
+		}
+		case 2: {
+			ifstream AccountFile("SystemLogin.csv", ios::in);
+			int NumLines = getNOofFile(AccountFile);
+			AccountFile.close();
+			changeStaffProfile(acc, NumLines);
+			break;
+		}
+		case 3:
+			StaffLogSign();
+			break;
+		case 4:
+			SchoolYearMenu();
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (1);
+}
+
+
+void StudentLogSign() {
+	system("cls");
+	int op{};
+	do {
+		cout << "STUDENT LOG SIGN" << endl;
+		cout << "0. Back" << endl;
+		cout << "1. Log in" << endl;
+		cout << "2. Sign up" << endl;
+		cout << "Enter your option: ";
+		cin >> op;
+		switch (op) {
+		case 0:
+			StaffOrStudent();
+			break;
+		case 1:
+			system("cls");
+			StudentLogin(acc);
+			StudentMenu();
+			break;
+		case 2:
+			StudentSignUp();
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (op != 0);
+}
+
+void StudentMenu() {
+	system("cls");
+	int op{};
+	do {
+		ifstream AccountFile("StudentAccount.csv", ios::in);
+		string temp;
+		while (getline(AccountFile, temp)) {
+			if (getNo(temp) == acc.UserName) {
+				readStudentAccount(acc, temp);
+				break;
+			}
+		}
+		AccountFile.close();
+		cout << "STUDENT MENU" << endl;
+		cout << "0. Back" << endl;
+		cout << "1. View profile" << endl;
+		cout << "2. Change profile" << endl;
+		cout << "3. Log out" << endl;
+		cout << "4. View the list of courses" << endl;
+		cout << "5. View the scoreboard" << endl;
+		cout << "Enter your option: ";
+		cin >> op;
+		switch (op) {
+		case 0:
+			StudentLogSign();
+			break;
+		case 1:
+			viewStudentProfile(acc);
+			break;
+		case 2: {
+			ifstream AccountFile("StudentAccount.csv", ios::in);
+			int NumLines = getNOofFile(AccountFile);
+			AccountFile.close();
+			changeStudentProfile(acc, NumLines);
+			break;
+		}
+		case 3:
+			StudentLogSign();
+			break;
+		case 4:
+			cin.ignore();
+			viewCourseListStudent(acc.Student);
+			break;
+		case 5:
+			cin.ignore();
+			viewScoreBoardStudent(acc.Student);
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (op != 0);
+}
+
+void SchoolYearMenu() {
 	system("cls");
 	string CurrentPath = getCurrentPath();
 	CurrentPath += "\\SchoolYear";
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
-	else
-		cout << "Successful" << endl;
 
 	int op{};
 	do {
-		cout << "School Year Menu" << endl;
+		cout << "SCHOOL YEAR MENU" << endl;
 		cout << "0. Back" << endl;
 		cout << "1. Create a school year" << endl;
 		cout << "2. Choose a school year" << endl;
@@ -75,7 +197,8 @@ void StaffMenu() {
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
-			UserMenu();
+			SetCurrentDirectoryA("..");
+			StaffMenu();
 			break;
 		case 1:
 			createSchoolYear();
@@ -83,7 +206,7 @@ void StaffMenu() {
 		case 2:	
 			string SchoolYear;
 			chooseSchoolYear(SchoolYear);
-			SchoolYearMenu(SchoolYear);
+			Class_SemesterMenu(SchoolYear);
 			break;
 		}
 		system("pause");
@@ -91,19 +214,17 @@ void StaffMenu() {
 	} while (op!=0);
 }
 
-void SchoolYearMenu(string SchoolYear) {
+void Class_SemesterMenu(string SchoolYear) {
 	system("cls");
 
 	string CurrentPath = getCurrentPath();
 	CurrentPath += "\\"+SchoolYear;
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
-	else
-		cout << "Successful" << endl;
 
 	int op{};
 	do {
-		cout << "School Year " << SchoolYear << endl;
+		cout << "SCHOOL YEAR " << SchoolYear << endl;
 		cout << "0. Back" << endl;
 		cout << "1. Create a class" << endl;
 		cout << "2. View the list of classes and choose a class" << endl;
@@ -114,7 +235,8 @@ void SchoolYearMenu(string SchoolYear) {
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
-			StaffMenu();
+			SetCurrentDirectoryA("..");
+			SchoolYearMenu();
 			break;
 		case 1:
 			createClass();
@@ -148,9 +270,7 @@ void ClassMenu(string SchoolYear, string Class) {
 	
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
-	else
-		cout << "Successful" << endl;
-
+	
 	int op{};
 	do {
 		system("cls");
@@ -165,7 +285,8 @@ void ClassMenu(string SchoolYear, string Class) {
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
-			SchoolYearMenu(SchoolYear);
+			SetCurrentDirectoryA("..");
+			Class_SemesterMenu(SchoolYear);
 			break;
 		case 1: {
 			string SourcePath;
@@ -174,6 +295,7 @@ void ClassMenu(string SchoolYear, string Class) {
 			break;
 		}
 		case 2:
+			cin.ignore();
 			addStudentToClass(Class);
 			break;
 		case 3:
@@ -204,13 +326,11 @@ void SemesterMenu(string SchoolYear, string Semester) {
 	CurrentPath += "\\Semester\\" + Semester;
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
-	else
-		cout << "Successful" << endl;
 
 	int op{};
 	do {
 		system("cls");
-		cout << "Semester " << Semester << endl;
+		cout << "SEMESTER " << Semester << endl;
 		cout << "0. Back" << endl;
 		cout << "1. Create a course" << endl;
 		cout << "2. View the list of courses" << endl;
@@ -230,7 +350,8 @@ void SemesterMenu(string SchoolYear, string Semester) {
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
-			SchoolYearMenu(SchoolYear);
+			SetCurrentDirectoryA("..");
+			Class_SemesterMenu(SchoolYear);
 			break;
 		case 1:
 			createCourse(Semester);
@@ -324,6 +445,7 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 9: {
+			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
 			cin.ignore();
@@ -336,33 +458,36 @@ void SemesterMenu(string SchoolYear, string Semester) {
 			break;
 		}
 		case 10: {
-			string LinkIm;
-			cout << "Input link import: ";
+			viewFile(Semester);
 			cin.ignore();
-			getline(cin, LinkIm);
 			string CourseID;
 			cout << "Input the CourseID: ";
 			getline(cin, CourseID);
+			string LinkIm;
+			cout << "Input link import: ";
+			getline(cin, LinkIm);
 			string ScoreBoardName = "ScoreBoard\\" + CourseID + ".csv";
 			im_exFile(LinkIm, ScoreBoardName);
 			break;
 		}
 		case 11: {
+			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
 			cin.ignore();
 			getline(cin, CourseID);
 			string ScoreBoardName = "ScoreBoard\\" + CourseID;
-			viewFile(CourseID);
+			viewFile(ScoreBoardName);
 			system("pause");
 			break;
 		}
 		case 12: {
+			viewFile(Semester);
 			string CourseID;
 			cout << "Input the CourseID: ";
 			cin.ignore();
 			getline(cin, CourseID);
-
+			viewFile("ScoreBoard\\" + CourseID);
 			string StudentID;
 			cout << "Input the StudentID: ";
 			getline(cin, StudentID);
@@ -379,29 +504,6 @@ void SemesterMenu(string SchoolYear, string Semester) {
 	} while (1);
 }
 
-void StudentMenu() {
-	system("cls");
-	int op{};
-	do {
-		cout << "0. Back" << endl;
-		cout << "1. View the list of courses" << endl;
-		cout << "2. View the scoreboard" << endl;
-		cout << "Enter your option: ";
-		switch (op) {
-		case 0:
-			UserMenu();
-			break;
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-		}
-		system("pause");
-		system("cls");
-	} while (op != 0);
-}
 
 string getCurrentPath() {
 	char cwd[MAX_PATH];
@@ -411,7 +513,6 @@ string getCurrentPath() {
 }
 
 int main() {
-	cout << setw(20);
-	StaffMenu();
+	StaffOrStudent();
 	return 0;
 }

@@ -2,17 +2,12 @@
 
 void createClass() {
 	system("cls");
-	//Nhap ten lop
 	string ClassName;
 	cout << "Input Class: ";
 	cin.ignore();
 	getline(cin, ClassName);
-
 	string ClassPath = getCurrentPath() + "\\Class";
 	SetCurrentDirectoryA(ClassPath.c_str());
-
-	//Kiem tra da co lop hoc chua neu chua thi tao file moi
-
 	if (!checkFile(ClassPath)) {
 		fstream SchoolYearFile("Class.csv", ios_base::app);
 		SchoolYearFile << ClassName << '\n';
@@ -20,11 +15,9 @@ void createClass() {
 
 		createFile(ClassName);
 	}
-
 	ofstream ClassFile(ClassName + ".csv", ios::out);
 	ClassFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' << "Gender" << '\,' << "DayOfBirth" << '\,' << "SocialID" << '\,' << "TotalMark" << '\n';
 	ClassFile.close();
-
 	SetCurrentDirectoryA("..");
 }
 
@@ -75,7 +68,7 @@ void addStudentToClass(string Class) {
 
 	Class += ".csv";
 	ifstream ClassIFile(Class, ios::in);
-	int No = getNOofFile(ClassIFile);
+	int No = getNOofFile(ClassIFile)-1;
 	ClassIFile.close();
 	
 	Student a = inStudent();
@@ -85,8 +78,6 @@ void addStudentToClass(string Class) {
 	ClassOFile << a.No << '\,' << a.StudentID << '\,' << a.FirstName << '\,' << a.LastName << '\,' << a.Gender << '\,' << a.DateOfBirth << '\,' << a.SocialID << '\n';
 	ClassOFile.close();
 }
-
-
 
 void viewClassList(string Class) {
 	ifstream ClassXFile;
@@ -99,7 +90,7 @@ void viewClassList(string Class) {
 
 	string temp;
 	while (getline(ClassXFile, temp)) {
-		tokStr(temp);
+		tString(temp);
 		cout << temp<<endl;
 	}
 
@@ -108,24 +99,26 @@ void viewClassList(string Class) {
 
 void viewScoreBoardClass(string Class, int NumLines) {
 	SetCurrentDirectoryA("..");
+	string Semester;
+	cout << "Input Semester: ";
+	cin >> Semester;
 	
 	string temp;
 	string* Lines = new string[NumLines];
 
 	string ClassPath = "Class\\" + Class;
 	ifstream ClassIFile(ClassPath, ios::in);
-
-	/*int n = 0;
-	getline(ClassIFile, temp);
-	Lines[n++] = temp;*/
 	int n = 0;
-	
 	while (getline(ClassIFile, temp)) {
 		string StudentID = getID(temp);
 		double Mark = 0;
 		int nMark = 0;
-		getMarkCourse(StudentID, Mark, nMark);
-		Mark = Mark / (double)nMark;
+		getMarkCourse(StudentID, Mark, nMark, Semester);
+		if (nMark == 0) {
+			Mark = 0;
+		}
+		else
+			Mark = Mark / (double)nMark;
 		temp +='\,' + to_string(Mark);
 		Lines[n++] = temp;
 	}
@@ -144,10 +137,7 @@ void viewScoreBoardClass(string Class, int NumLines) {
 	SetCurrentDirectoryA(newPath.c_str());
 }
 
-void getMarkCourse(string StudentID, double& Mark, int& nMark) {
-	string Semester;
-	cout << "Input Semester: ";
-	cin >> Semester;
+void getMarkCourse(string StudentID, double& Mark, int& nMark, string Semester) {
 
 	List CourseList{};
 	initList(CourseList);
@@ -171,8 +161,8 @@ void getMarkCourse(string StudentID, double& Mark, int& nMark) {
 }
 
 double getTotalMark(string Data) {
-	int prevTotal = Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,') + 1) + 1) + 1);
-	int nextTotal = Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,', Data.find('\,') + 1) + 1) + 1) + 1);
+	int prevTotal = Data.find(',', Data.find(',', Data.find(',', Data.find(',') + 1) + 1) + 1);
+	int nextTotal = Data.find(',', Data.find(',', Data.find(',', Data.find(',', Data.find(',') + 1) + 1) + 1) + 1);
 	string temp = Data.substr(prevTotal+1, nextTotal-prevTotal-1);
 	double x = atof(temp.c_str());
 	return x;
@@ -185,7 +175,6 @@ void getCourseList(string Semester, List& CourseList) {
 		cout << "Error opening file" << endl;
 		return;
 	}
-
 	string temp;
 	while (getline(SemesterFile, temp, ',')) {
 		temp = getNo(temp);
@@ -193,6 +182,5 @@ void getCourseList(string Semester, List& CourseList) {
 		addTail(CourseList, buffer);
 		getline(SemesterFile, temp);
 	}
-
 	SemesterFile.close();
 }

@@ -31,18 +31,21 @@ void createCourse(string Semester) {
 	Course a = inCourse();
 
 	ofstream SemesterFile(Semester + ".csv", ios_base::app);
-	SemesterFile << a.CourseID << '\,' << a.CourseName << '\,' << a.ClassName << '\,' << a.TeacherName << '\,' << a.NumOfCredits << '\,' << a.MaxNumOfStudents << '\,' << a.Session << '\,' << a.DayOfWeek << '\n';
+	SemesterFile << a.CourseID << '\,' << a.CourseName << '\,' << a.ClassName << '\,' << a.TeacherName << '\,' 
+		<< a.NumOfCredits << '\,' << a.MaxNumOfStudents << '\,' << a.Session << '\,' << a.DayOfWeek << '\n';
 	SemesterFile.close();
 
 	string CourseName = a.CourseID + "\\" + a.CourseID + ".csv";
 
 	ofstream CourseFile(a.CourseID +".csv", ios::out);
-	CourseFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' << "Gender" << '\,' << "DayOfBirth" << '\,' << "SocialID" << '\n';
+	CourseFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' 
+		<< "Gender" << '\,' << "DayOfBirth" << '\,' << "SocialID" << '\n';
 	CourseFile.close();
 
 	string ScoreBoardName = "ScoreBoard\\"+a.CourseID+".csv";
 	ofstream ScoreBoardFile(ScoreBoardName, ios::out);
-	ScoreBoardFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' << "Total Mark" << '\,' << "Final Mark" << '\,' << "Midtern Mark" << '\,' << "Other Mark" << '\n';
+	ScoreBoardFile << "No" << '\,' << "StudentID" << '\,' << "FirstName" << '\,' << "LastName" << '\,' 
+		<< "Total Mark" << '\,' << "Final Mark" << '\,' << "Midtern Mark" << '\,' << "Other Mark" << '\n';
 	ScoreBoardFile.close();
 }
 
@@ -100,7 +103,8 @@ void addStudentToCourse(string CourseID) {
 
 	a.No = to_string(No);
 	ofstream CourseOFile(CourseID, ios::app);
-	CourseOFile << a.No << '\,' << a.StudentID << '\,' << a.FirstName << '\,' << a.LastName << '\,' << a.Gender << '\,' << a.DateOfBirth << '\,' << a.SocialID << '\n';
+	CourseOFile << a.No << '\,' << a.StudentID << '\,' << a.FirstName << '\,' 
+		<< a.LastName << '\,' << a.Gender << '\,' << a.DateOfBirth << '\,' << a.SocialID << '\n';
 	CourseOFile.close();
 }
 
@@ -167,7 +171,8 @@ void updateCourse(string SemesterFileName, string CourseID, int NumLines) {
 		}
 		else {
 			string NewCourse;
-			NewCourse = a.CourseID + '\,' + a.CourseName + '\,' + a.ClassName + '\,' + a.TeacherName + '\,' + a.NumOfCredits + '\,' + a.MaxNumOfStudents + '\,' + a.Session + '\,' + a.DayOfWeek;
+			NewCourse = a.CourseID + '\,' + a.CourseName + '\,' + a.ClassName + '\,' + a.TeacherName 
+				+ '\,' + a.NumOfCredits + '\,' + a.MaxNumOfStudents + '\,' + a.Session + '\,' + a.DayOfWeek;
 			temp = NewCourse;
 			Lines[n++] = temp;
 		}
@@ -193,7 +198,6 @@ void updateCourse(string SemesterFileName, string CourseID, int NumLines) {
 	exCourse = "ScoreBoard\\" + a.CourseID + ".csv";
 	im_exFile(imCourse, exCourse);
 	remove(imCourse.c_str());
-
 }
 
 void deleteCourse(string SemesterFileName, string CourseID, int NumLines) {
@@ -260,7 +264,8 @@ void updateStudentScore(string ScoreBoardName, string StudentID, int NumLines) {
 		}
 		else {
 			int t = temp.find('\,', temp.find('\,', temp.find('\,', temp.find('\,') + 1) + 1) + 1);
-			string NewStudent = temp.substr(0, t) + '\,' + TotalMark + '\,' + FinalMark + '\,' + MidternMark + '\,' + OtherMark;
+			string NewStudent = temp.substr(0, t) + '\,' + TotalMark + '\,' 
+				+ FinalMark + '\,' + MidternMark + '\,' + OtherMark;
 			temp = NewStudent;
 			Lines[n++] = temp;
 		}

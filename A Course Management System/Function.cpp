@@ -31,9 +31,9 @@ void createFolder(string& Path, string Name) {
 	createFile(Path);
 }//Tai sao &Path
 
-void copyFile(ifstream& File1, ofstream& File2) { //copy file1 to file2
+void copyFile(ifstream& File1, ofstream& File2) { 
 	string line;
-	while (getline(File1, line)) { //while(getline(File1,line) tot hon?
+	while (getline(File1, line)) { 
 		line += '\n';
 		File2 << line;
 	}
@@ -50,8 +50,6 @@ void normalizePath(string& Str) {
 void importList(string SourcePath, string DesPath) {
 	cout << "Input path source: ";
 	cin >> SourcePath;
-	normalizePath(SourcePath);
-
 	ifstream SourceFile(SourcePath, ios::in);
 	if (!SourceFile.is_open()) {
 		cout << "Error opening file" << endl;
@@ -62,9 +60,7 @@ void importList(string SourcePath, string DesPath) {
 		cout << "Error opening file" << endl;
 		return;
 	}
-
 	copyFile(SourceFile, DesFile);
-
 	SourceFile.close();
 	DesFile.close();
 
@@ -116,7 +112,7 @@ void viewFile(string FileName) {
 
 	string temp;
 	while (getline(File, temp)) {
-		tokStr(temp);
+		tString(temp);
 		cout << temp << endl;
 	}
 
@@ -164,10 +160,18 @@ void upStudentListToFile() {
 	
 }
 
-void tokStr(string& Str) {
+void tString(string& Str) {
+	for (int i = 0; i < Str.length(); i++) {
+		if (Str[i] == ',') {
+			Str[i] = '\t';
+		}
+	}
+}
+
+void nString(string& Str) {
 	for (int i = 0; i < Str.length(); i++) {
 		if (Str[i] == '\,') {
-			Str[i] = '\t';
+			Str[i] = '\n';
 		}
 	}
 }
