@@ -120,7 +120,6 @@ int getToken(string& token, string s, int& startPos) {
 void changeStaffProfile(Account& a, int NumLines) {
 	viewStaffProfile(a);
 
-	//Update
 	cin.ignore();
 	updateProfile(a);
 	
@@ -235,7 +234,6 @@ void readStudentAccount(Account& a, string temp) {
 void changeStudentProfile(Account& a, int NumLines) {
 	viewStudentProfile(a);
 
-	//Update
 	cin.ignore();
 	updateStudentProfile(a);
 

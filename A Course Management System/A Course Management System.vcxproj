@@ -128,17 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="SchoolYear.h" />
-    <ClInclude Include="SystemLogIn.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Course.cpp" />
     <ClCompile Include="Function.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SchoolYear.cpp" />
-    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Semester.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="SystemLogIn.cpp" />

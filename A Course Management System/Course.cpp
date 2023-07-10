@@ -49,48 +49,6 @@ void createCourse(string Semester) {
 	ScoreBoardFile.close();
 }
 
-//void getCourseList(CourseList& CourseList) {
-//void viewCourseList(Course& temp, string Semester){
-//
-//	ifstream CourseFile;
-//	CourseFile.open(Semester+".csv", ios::in);
-//	if (!CourseFile.is_open()) {
-//		return;
-//	}
-//
-//	/*Course temp;*/
-//	
-//	getline(CourseFile, temp.CourseID, ',');
-//	getline(CourseFile, temp.CourseName, ',');
-//	getline(CourseFile, temp.ClassName, ',');
-//	getline(CourseFile, temp.TeacherName, ',');
-//	getline(CourseFile, temp.NumOfCredits, ',');
-//	getline(CourseFile, temp.MaxNumofStudents, ',');
-//	getline(CourseFile, temp.Session, ',');
-//	getline(CourseFile, temp.DayOfWeek, '\n');
-//
-//	CourseFile.close();
-//}
-
-//void viewCourseList(string Semester) {
-//	ifstream CourseFile;
-//	Semester += ".csv";
-//	CourseFile.open(Semester, ios::in);
-//	if (!CourseFile.is_open()) {
-//		cout << "Error opening file" << endl;
-//		return;
-//	}
-//
-//	string temp;
-//	while (getline(CourseFile, temp)) {
-//		tokStr(temp);
-//		cout << temp << endl;
-//	}
-//
-//	CourseFile.close();
-//}
-
-
 void addStudentToCourse(string CourseID) {
 	system("cls");
 
@@ -282,16 +240,3 @@ void updateStudentScore(string ScoreBoardName, string StudentID, int NumLines) {
 	ScoreBoardOFile.close();
 }
 
-
-//void viewCourse(string SemesterPath) {
-//	List CourseList{};
-//	string line;
-//	fstream SemesterFile(SemesterPath + ".csv", ios_base::in);
-//	while (!SemesterFile.eof()) {
-//		getline(SemesterFile, line);
-//		line += '\n';
-//		addTail(CourseList, createNode(line));
-//	}
-//	SemesterFile.close();
-//	outList(CourseList);
-//}

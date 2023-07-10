@@ -59,7 +59,6 @@ void StaffMenu() {
 	system("cls");
 	int op{};
 	do {
-		
 		cout << "STAFF MENU" << endl;
 		cout << "0. Back" << endl;
 		cout << "1. View profile" << endl;
@@ -197,7 +196,6 @@ void SchoolYearMenu() {
 		switch (op) {
 		case 0:
 			SetCurrentDirectoryA("..");
-			SetCurrentDirectoryA("..");
 			StaffMenu();
 			break;
 		case 1:
@@ -267,7 +265,6 @@ void ClassMenu(string SchoolYear, string Class) {
 	system("cls");
 
 	string CurrentPath = getCurrentPath()+ "\\Class";
-	
 	if (SetCurrentDirectoryA(CurrentPath.c_str()) == 0)
 		cout << "Failed" << endl;
 	
@@ -504,15 +501,3 @@ void SemesterMenu(string SchoolYear, string Semester) {
 	} while (1);
 }
 
-
-string getCurrentPath() {
-	char cwd[MAX_PATH];
-	GetCurrentDirectoryA(sizeof(cwd), cwd);
-	string CurrentPath(cwd);
-	return CurrentPath;
-}
-
-int main() {
-	StaffOrStudent();
-	return 0;
-}

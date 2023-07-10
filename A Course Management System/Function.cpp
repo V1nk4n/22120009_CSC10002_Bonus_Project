@@ -1,8 +1,6 @@
 #include "Header.h"
 
-//Ham kiem tra 1 phan tu da xuat hien trong file chua
 
-//Ham tao 1 file moi
 int checkFile(string FileName) {
 	fstream File(FileName + ".csv", ios_base::in);
 	if (File.good()) {
@@ -14,7 +12,7 @@ int checkFile(string FileName) {
 	return 0;
 }
 
-void createFile(string Path) { //Sua thanh kieu void
+void createFile(string Path) { 
 	fstream File(Path+".csv", ios_base::out);
 	if (!File) {
 		cout << "Error creating class file." << endl;
@@ -29,7 +27,7 @@ void createFolder(string& Path, string Name) {
 	_mkdir(Path.c_str());
 	Path += "\\" + Name;
 	createFile(Path);
-}//Tai sao &Path
+}
 
 void copyFile(ifstream& File1, ofstream& File2) { 
 	string line;
@@ -131,8 +129,7 @@ int getNOofFile(ifstream& File) {
 		return (count+1);
 }
 
-void upStudentListToFile() {
-	//NHAP LINK
+void upStudentListToFile() {	
 	string SourceLink;
 	cout << "Inputt link source file: ";
 	cin >> SourceLink;
@@ -154,10 +151,7 @@ void upStudentListToFile() {
 	copyFile(SourceFile, DesFile);
 
 	SourceFile.close();
-	DesFile.close();
-
-	//COPY FILE TREN SANG FILE HE THONG
-	
+	DesFile.close();	
 }
 
 void tString(string& Str) {
@@ -174,6 +168,13 @@ void nString(string& Str) {
 			Str[i] = '\n';
 		}
 	}
+}
+
+string getCurrentPath() {
+	char cwd[MAX_PATH];
+	GetCurrentDirectoryA(sizeof(cwd), cwd);
+	string CurrentPath(cwd);
+	return CurrentPath;
 }
 
 
